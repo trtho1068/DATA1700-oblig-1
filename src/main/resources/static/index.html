@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Bestilling av kinobiletter</h1>
+  <form>
+    <ul>
+      <li>
+        <label for="film">Velg film:</label>
+        <select id="film">
+          <option value="film1">Film1</option>
+          <option value="film2">Film2</option>
+          <option value="film3">Film3</option>
+          <option value="film4">Film4</option>
+          <option value="film5">Film5</option>
+        </select>
+      </li>
+      <li>
+        <label for="antall">Antall</label>
+        <input type="number" min="1" id="antall">
+      </li>
+      <li>
+        <label for="fornavn">Fornavn</label>
+        <input type="text" id="fornavn">
+        <label for="etternavn">Etternavn</label>
+        <input type="text" id="etternavn">
+        <label for="telefonnr">Telefonnr</label>
+        <input type="text" id="telefonnr">
+        <label for="epost">Epost</label>
+        <input type="email" id="epost">
+      </li>
+      <li>
+        <button type="submit">Kjøp bilett</button>
+      </li>
+    </ul>
+  </form>
+  <h2>Alle billetter</h2>
+  <button>Slett alle billettene</button>
+</body>
+</html>
