@@ -19,11 +19,14 @@
       <li>
         <label for="movies">Velg film:</label>
         <select id="movies" name="movie">
+          <option>Into The Wild</option>
         </select>
       </li>
       <li>
         <label for="number">Antall</label>
-        <input type="number" min="1" id="number" name="number">
+        <input type="text" inputmode="numeric" id="number" name="number"
+               pattern="\d*" maxlength="3">
+        <span id="error-number" class="error" aria-live="polite"></span>
       </li>
       <li>
         <ul class="userdata">

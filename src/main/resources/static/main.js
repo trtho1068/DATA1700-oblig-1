@@ -1,57 +1,26 @@
 let form = document.querySelector("#ticket-order");
-let tickets = [];
+let tickets = JSON.parse(sessionStorage.getItem("tickets"));
+tickets ||= [];  // if false (null), empty array
 
-let inpFirstName = document.querySelector("#firstname");
+let inputNumber = document.querySelector("#number");
+let inputFirstName = document.querySelector("#firstname");
+let inputLastName = document.querySelector("#lastname");
+let inputPhoneNumber = document.querySelector("#phone-number");
+let inputEmail = document.querySelector("#email");
+
+let errorNumber = document.querySelector("#error-number")
 let errorFirstName = document.querySelector("#error-firstname");
-
-inpFirstName.addEventListener("input", (event) => {
-    if (inpFirstName.value && !inpFirstName.checkValidity()) {
-        errorFirstName.textContent = "Ugyldig fornavn";
-    } else {
-        errorFirstName.textContent = "";
-    }
-});
-
-
-let inpLastName = document.querySelector("#lastname");
 let errorLastName = document.querySelector("#error-lastname");
-
-inpLastName.addEventListener("input", (event) => {
-    if (inpLastName.value && !inpLastName.checkValidity()) {
-        errorLastName.textContent = "Ugyldig etternavn";
-    } else {
-        errorLastName.textContent = "";
-    }
-});
-
-
-let inpPhoneNumber = document.querySelector("#phone-number");
 let errorPhoneNumber = document.querySelector("#error-phone-number");
-
-inpPhoneNumber.addEventListener("input", (event) => {
-    if (inpPhoneNumber.value && !inpPhoneNumber.checkValidity()) {
-        errorPhoneNumber.textContent = "Ugyldig telefonnr";
-    } else {
-        errorPhoneNumber.textContent = "";
-    }
-});
-
-
-let inpEmail = document.querySelector("#email");
 let errorEmail = document.querySelector("#error-email");
 
-inpEmail.addEventListener("input", (event) => {
-    if (inpEmail.value && !inpEmail.checkValidity()) {
-        errorEmail.textContent = "Ugyldig epost addresse";
-    } else {
-        errorEmail.textContent = "";
-    }
-});
+let buttonBuyTickets = document.querySelector("#buy-tickets");
+let buttonDeleteTickets = document.querySelector("#delete-tickets");
 
 
 function Ticket(formData) {
     return {
-        number: formData.get("number"),
+        number: parseInt(formData.get("number")),
         firstname: formData.get("firstname"),
         lastname: formData.get("lastname"),
         phoneNumber: formData.get("phone-number"),
@@ -60,21 +29,63 @@ function Ticket(formData) {
 }
 
 
-let btnBuyTickets = document.querySelector("#buy-tickets");
-
-btnBuyTickets.addEventListener("click", (event) => {
-    if (form.checkValidity()) {
-        let ticket = new Ticket(new FormData(form));
-        tickets.push(ticket);
+inputNumber.addEventListener("input", (event) => {
+    if (inputNumber.value && !inputNumber.checkValidity()) {
+        errorNumber.textContent = "Ugyldig antall"
     } else {
-        console.log("Attempt to buy invalid ticket.")
+        errorNumber.textContent = "";
     }
 });
 
 
-let btnDeleteTickets = document.querySelector("#delete-tickets");
-btnDeleteTickets.addEventListener("click", (event) => {
+inputFirstName.addEventListener("input", (event) => {
+    if (inputFirstName.value && !inputFirstName.checkValidity()) {
+        errorFirstName.textContent = "Ugyldig fornavn";
+    } else {
+        errorFirstName.textContent = "";
+    }
+});
+
+
+inputLastName.addEventListener("input", (event) => {
+    if (inputLastName.value && !inputLastName.checkValidity()) {
+        errorLastName.textContent = "Ugyldig etternavn";
+    } else {
+        errorLastName.textContent = "";
+    }
+});
+
+
+inputPhoneNumber.addEventListener("input", (event) => {
+    if (inputPhoneNumber.value && !inputPhoneNumber.checkValidity()) {
+        errorPhoneNumber.textContent = "Ugyldig telefonnr";
+    } else {
+        errorPhoneNumber.textContent = "";
+    }
+});
+
+
+inputEmail.addEventListener("input", (event) => {
+    if (inputEmail.value && !inputEmail.checkValidity()) {
+        errorEmail.textContent = "Ugyldig epost addresse";
+    } else {
+        errorEmail.textContent = "";
+    }
+});
+
+
+buttonBuyTickets.addEventListener("click", (event) => {
+    if (form.checkValidity()) {
+        let ticket = new Ticket(new FormData(form));
+        tickets.push(ticket);
+        form.reset();
+        sessionStorage.setItem("tickets", JSON.stringify(tickets));
+    }
+});
+
+buttonDeleteTickets.addEventListener("click", (event) => {
     // Are you sure?...
     // Surprised to learn that there is no method array.clear
     tickets.splice(0, tickets.length);
+    sessionStorage.removeItem("tickets");
 });
