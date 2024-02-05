@@ -1,13 +1,32 @@
+html, body {
+    font-family: "Helvetica", "Arial", "sans-serif";
+}
+
 ul {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 18px;
     margin: 0;
     padding: 0;
 }
 
+ul.userdata {
+    gap: 4px;
+}
+
 li {
     display: grid;
-    grid-template-columns: 10vw 20vw;
-    row-gap: 4px;
+    grid-template-columns: 7em 12em 12em;
+    column-gap: 8px;
+    align-items: center;
+}
+
+input:focus:invalid {
+    background-color: rgba(255,0,0,0.07);
+}
+
+.error {
+    font-size: 0.83em;
+    color: rgba(0,0,0,0.6);
+    align-self: center;
 }
