@@ -1,4 +1,5 @@
 let form = document.querySelector("#ticket-order");
+
 let tickets = JSON.parse(sessionStorage.getItem("tickets"));
 tickets ||= [];  // if false (null), empty array
 
@@ -17,15 +18,30 @@ let errorEmail = document.querySelector("#error-email");
 let buttonBuyTickets = document.querySelector("#buy-tickets");
 let buttonDeleteTickets = document.querySelector("#delete-tickets");
 
+let tBodyAllTickets = document.querySelector("#all-tickets");
+for (let ticket of tickets) {
+    insertTableRow(tBodyAllTickets, ticket);
+}
+
 
 function Ticket(formData) {
     return {
+        movie: formData.get("movie"),
         number: parseInt(formData.get("number")),
         firstname: formData.get("firstname"),
         lastname: formData.get("lastname"),
         phoneNumber: formData.get("phone-number"),
         email: formData.get("email"),
     };
+}
+
+
+function insertTableRow(tElement, ticket) {
+    let newRow = tElement.insertRow();
+    for (let key in ticket) {
+        let cell = newRow.insertCell();
+        cell.textContent = ticket[key];
+    }
 }
 
 
@@ -80,6 +96,7 @@ buttonBuyTickets.addEventListener("click", (event) => {
         tickets.push(ticket);
         form.reset();
         sessionStorage.setItem("tickets", JSON.stringify(tickets));
+        insertTableRow(tBodyAllTickets, ticket);
     }
 });
 
@@ -88,4 +105,9 @@ buttonDeleteTickets.addEventListener("click", (event) => {
     // Surprised to learn that there is no method array.clear
     tickets.splice(0, tickets.length);
     sessionStorage.removeItem("tickets");
+
+    while (tBodyAllTickets.firstChild) {
+        // firstChild null if no children
+        tBodyAllTickets.removeChild(tBodyAllTickets.firstChild);
+    }
 });

@@ -19,7 +19,10 @@
       <li>
         <label for="movies">Velg film:</label>
         <select id="movies" name="movie">
-          <option>Into The Wild</option>
+          <option>Blah</option>
+          <option>Blah blah</option>
+          <option>Blah blah blah</option>
+          <option>Blah blah blah blah</option>
         </select>
       </li>
       <li>
@@ -63,8 +66,28 @@
     </ul>
   </form>
   <h2>Alle billetter</h2>
-  <table id="all-tickets">
+  <table>
     <caption>Alle dine billetter</caption>
+    <colgroup>
+      <col>
+      <col>
+      <col>
+      <col>
+      <col>
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col">Film</th>
+        <th scope="col">Antall</th>
+        <th scope="col">Fornavn</th>
+        <th scope="col">Etternavn</th>
+        <th scope="col">Telefonnr</th>
+        <th scope="col">Epost</th>
+      </tr>
+    </thead>
+    <tbody id="all-tickets" aria-live="polite">
+    </tbody>
   </table>
   <button id="delete-tickets">Slett alle billettene</button>
 </body>
